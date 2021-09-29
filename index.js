@@ -6,19 +6,20 @@
  */
 /* eslint-disable no-proto */
 
-const base64 = require('base64-js')
-const ieee754 = require('ieee754')
+import * as base64 from '@frida/base64-js'
+import * as ieee754 from '@frida/ieee754'
+
 const customInspectSymbol =
   (typeof Symbol === 'function' && typeof Symbol['for'] === 'function') // eslint-disable-line dot-notation
     ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
     : null
 
-exports.Buffer = Buffer
-exports.SlowBuffer = SlowBuffer
-exports.INSPECT_MAX_BYTES = 50
+export const config = {
+  INSPECT_MAX_BYTES: 50
+}
 
 const K_MAX_LENGTH = 0x7fffffff
-exports.kMaxLength = K_MAX_LENGTH
+export { K_MAX_LENGTH as kMaxLength }
 
 /**
  * If `Buffer.TYPED_ARRAY_SUPPORT`:
@@ -93,7 +94,7 @@ function createBuffer (length) {
  * The `Uint8Array` prototype remains unmodified.
  */
 
-function Buffer (arg, encodingOrOffset, length) {
+export function Buffer (arg, encodingOrOffset, length) {
   // Common case.
   if (typeof arg === 'number') {
     if (typeof encodingOrOffset === 'string') {
@@ -327,7 +328,7 @@ function checked (length) {
   return length | 0
 }
 
-function SlowBuffer (length) {
+export function SlowBuffer (length) {
   if (+length != length) { // eslint-disable-line eqeqeq
     length = 0
   }
@@ -616,7 +617,7 @@ Buffer.prototype.equals = function equals (b) {
 
 Buffer.prototype.inspect = function inspect () {
   let str = ''
-  const max = exports.INSPECT_MAX_BYTES
+  const max = config.INSPECT_MAX_BYTES
   str = this.toString('hex', 0, max).replace(/(.{2})/g, '$1 ').trim()
   if (this.length > max) str += ' ... '
   return '<Buffer ' + str + '>'
