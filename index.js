@@ -266,7 +266,7 @@ function fromObject (obj) {
   }
 
   if (obj.length !== undefined) {
-    if (typeof obj.length !== 'number' || numberIsNaN(obj.length)) {
+    if (typeof obj.length !== 'number' || Number.isNaN(obj.length)) {
       return createBuffer(0)
     }
     return fromArrayLike(obj)
@@ -671,7 +671,7 @@ function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
     byteOffset = -0x80000000
   }
   byteOffset = +byteOffset // Coerce to Number.
-  if (numberIsNaN(byteOffset)) {
+  if (Number.isNaN(byteOffset)) {
     // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
     byteOffset = dir ? 0 : (buffer.length - 1)
   }
@@ -801,7 +801,7 @@ function hexWrite (buf, string, offset, length) {
   let i
   for (i = 0; i < length; ++i) {
     const parsed = parseInt(string.substr(i * 2, 2), 16)
-    if (numberIsNaN(parsed)) return i
+    if (Number.isNaN(parsed)) return i
     buf[offset + i] = parsed
   }
   return i
@@ -2024,11 +2024,6 @@ function blitBuffer (src, dst, offset, length) {
     dst[i + offset] = src[i]
   }
   return i
-}
-
-function numberIsNaN (obj) {
-  // For IE11 support
-  return obj !== obj // eslint-disable-line no-self-compare
 }
 
 // Create lookup table for `toString('hex')`
