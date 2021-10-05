@@ -1,6 +1,6 @@
 {
   "name": "@frida/buffer",
-  "description": "Node.js Buffer API, for Frida",
+  "description": "Node.js's buffer module for Frida",
   "version": "7.0.1",
   "publishConfig": {
     "access": "public"
