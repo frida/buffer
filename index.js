@@ -6,8 +6,8 @@
  */
 /* eslint-disable no-proto */
 
-import * as base64 from '@frida/base64-js'
-import * as ieee754 from '@frida/ieee754'
+import * as base64 from 'base64-js'
+import * as ieee754 from 'ieee754'
 
 export const config = {
   INSPECT_MAX_BYTES: 50

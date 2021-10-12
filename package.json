@@ -18,8 +18,8 @@
     "James Halliday <mail@substack.net>"
   ],
   "dependencies": {
-    "@frida/base64-js": "^2.0.2",
-    "@frida/ieee754": "^2.0.1"
+    "base64-js": "^1.5.1",
+    "ieee754": "^1.2.1"
   },
   "devDependencies": {
     "standard": "*"
