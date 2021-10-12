@@ -2039,3 +2039,10 @@ const hexSliceLookupTable = (function () {
   }
   return table
 })()
+
+export default {
+  config,
+  kMaxLength: K_MAX_LENGTH,
+  Buffer,
+  SlowBuffer
+}
